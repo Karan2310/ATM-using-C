@@ -45,7 +45,7 @@ int main()
                     else
                     {
                         printf("\nNot enough Balance. \n");
-                        printf("You can withdraw %.2f \n\n", wd - charges);
+                        printf("You can withdraw %.2f \n\n", bal - charges);
                     }
                     break;
                 }
