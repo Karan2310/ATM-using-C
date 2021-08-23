@@ -2,22 +2,27 @@
 
 int main()
 {
-    int userInput, pass;
+    int userInput, pass = 0000, passIN, newpass;
+    FILE *pas;
     float bal = 50000;
     printf("\nWelcome to the ATM\n\n");
     printf("Enter your password: ");
-    scanf("%d", &pass);
-    if (pass == 0000)
+    scanf("%d", &passIN);
+    pas = fopen("pass.txt", "r");
+    fscanf(pas, "%d", &pass);
+    if (pass == passIN)
     {
+        fclose(pas);
         do
         {
             printf("\nSelect an option from the given menu:\n");
             printf("1: For Withdrawal\n");
             printf("2: For Balance check\n");
+            printf("3: Change Password\n");
             printf("0: Exit\n\n");
             scanf("%d", &userInput);
 
-            if (userInput < 3)
+            if (userInput <= 3)
             {
                 switch (userInput)
 
@@ -51,6 +56,17 @@ int main()
                     break;
                 }
 
+                case 3:
+                {
+                    pas = fopen("pass.txt", "w");
+                    printf("\nEnter new password: ");
+                    scanf("%d", &newpass);
+                    fprintf(pas, "%d", newpass);
+                    fclose(pas);
+                    printf("Password Changed Sussecfully\n");
+                    break;
+                }
+
                 case 0:
                 {
                     printf("\nThankyou for Banking with us\n");
@@ -63,7 +79,7 @@ int main()
                 printf("<--Invalid Input-->\n");
                 printf("<--Thankyou for banking with us!-->");
             }
-        } while (userInput < 3 && userInput != 0);
+        } while (userInput <= 3 && userInput != 0);
     }
     else
     {
